@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+attributeFormDefault="unqualified" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.zastr.by/xml"
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="banks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="saving-deposite">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="bank-name" type="xs:string" />
+                <xs:element name="country" type="xs:string" />
+                <xs:element name="depositor">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="name" type="xs:string" />
+                      <xs:element minOccurs="0" name="age" type="xs:byte" />
+                      <xs:element name="phone" type="xs:string" />
+                      <xs:element name="adress" type="xs:string" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="account-id" type="xs:string" />
+                <xs:element name="amount-on-deposit" type="xs:string" />
+                <xs:element name="profitability" type="xs:string" />
+                <xs:element name="expiration-date" type="xs:date" />
+              </xs:sequence>
+              <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+              <xs:attribute name="website" type="xs:string" use="optional" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" name="recurring-deposit">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="bank-name" type="xs:string" />
+                <xs:element name="country" type="xs:string" />
+                <xs:element name="depositor">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="name" type="xs:string" />
+                      <xs:element minOccurs="0" name="age" type="xs:byte" />
+                      <xs:element name="phone" type="xs:string" />
+                      <xs:element name="adress" type="xs:string" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="account-id" type="xs:string" />
+                <xs:element name="amount-on-deposit" type="xs:string" />
+                <xs:element name="profitability" type="xs:string" />
+                <xs:element name="expiration-date" type="xs:date" />
+              </xs:sequence>
+              <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+              <xs:attribute name="website" type="xs:string" use="optional" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="current-account-deposite">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="bank-name" type="xs:string" />
+                <xs:element name="country" type="xs:string" />
+                <xs:element name="depositor">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="name" type="xs:string" />
+                      <xs:element name="age" type="xs:byte" />
+                      <xs:element name="phone" type="xs:string" />
+                      <xs:element name="adress" type="xs:string" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="account-id" type="xs:string" />
+                <xs:element name="amount-on-deposit" type="xs:string" />
+                <xs:element name="profitability" type="xs:string" />
+                <xs:element name="expiration-date" type="xs:date" />
+              </xs:sequence>
+              <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
