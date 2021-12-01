@@ -1,21 +1,42 @@
 package by.zastr.xml.entity;
 
 public abstract class Deposit {
+	private int id;
 	private String bankName;
 	private String country;
 	private Depositor depositor;
 	private String accountIdString;
 	private long amountOnDeposit;
 	private byte profitobility;
-	public Deposit(String bankName, String country, Depositor depositor, String accountIdString,
-			long amountOnDeposit) {
+	
+	public Deposit(int id, String bankName, String country, Depositor depositor, String accountIdString,
+			long amountOnDeposit, byte profitobility) {
 		super();
+		this.id = id;
 		this.bankName = bankName;
 		this.country = country;
 		this.depositor = depositor;
 		this.accountIdString = accountIdString;
 		this.amountOnDeposit = amountOnDeposit;
+		this.profitobility = profitobility;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public byte getProfitobility() {
+		return profitobility;
+	}
+
+	public void setProfitobility(byte profitobility) {
+		this.profitobility = profitobility;
+	}
+
 	public String getBankName() {
 		return bankName;
 	}
@@ -53,6 +74,7 @@ public abstract class Deposit {
 	public void setProfibility(byte profibility) {
 		this.profitobility = profibility;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,9 +84,11 @@ public abstract class Deposit {
 		result = prime * result + ((bankName == null) ? 0 : bankName.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((depositor == null) ? 0 : depositor.hashCode());
+		result = prime * result + id;
 		result = prime * result + profitobility;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,14 +120,19 @@ public abstract class Deposit {
 				return false;
 		} else if (!depositor.equals(other.depositor))
 			return false;
+		if (id != other.id)
+			return false;
 		if (profitobility != other.profitobility)
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AbstractDeposit [bankName=");
+		builder.append("Deposit [id=");
+		builder.append(id);
+		builder.append(", bankName=");
 		builder.append(bankName);
 		builder.append(", country=");
 		builder.append(country);
@@ -113,10 +142,9 @@ public abstract class Deposit {
 		builder.append(accountIdString);
 		builder.append(", amountOnDeposit=");
 		builder.append(amountOnDeposit);
-		builder.append(", profibility=");
+		builder.append(", profitobility=");
 		builder.append(profitobility);
 		builder.append("]");
 		return builder.toString();
-	}
-	
+	}	
 }
