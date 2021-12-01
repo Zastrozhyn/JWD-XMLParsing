@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.zastr.by/deposites"
+        xmlns:tns="http://www.zastr.by/deposites"
+        elementFormDefault="qualified">
+    <element name="deposit" type="tns:Deposit" abstract="true"/>
+    <element name="recurring-deposit" type="tns:Recurring-deposit" substitutionGroup="tns:deposit"/>
+    <element name="saving-deposit" type="tns:Saving-deposit" substitutionGroup="tns:deposit"/>
+    <element name="current-account-deposit" type="tns:Current-account-deposit" substitutionGroup="tns:deposit"/>
+     <element name="deposites">
+       <complexType>
+           <sequence>
+               <element ref="tns:deposit"
+                        minOccurs="1"
+                        maxOccurs="unbounded"/>
+           </sequence>
+       </complexType>
+    </element>
+    <complexType name="Deposit">
+        <sequence>
+            <element name="bank-name" type="string"/>
+            <element name="country" type="tns:Country"/>
+            <element name="depositor" type="tns:Depositor"/>
+            <element name="account-id" type="tns:Account-id"/>
+            <element name="amount-on-deposit" type="long"/>
+            <element name="profitability" type="byte"/>
+        </sequence>
+        <attribute name="id" use="required" type="integer"/>
+        <attribute name="website" use="optional" type="string"/>
+    </complexType>
+    
+    <complexType name="Recurring-deposit">
+        <complexContent>
+            <extension base="tns:Deposit">
+                <sequence>
+                    <element name="service-cost" type="integer"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="Saving-deposit">
+        <complexContent>
+            <extension base="tns:Deposit">
+                <sequence>
+                    <element name="expiration-date" type="date"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="Current-account-deposit">
+        <complexContent>
+            <extension base="tns:Deposit">
+                <sequence>
+                    <element name="expiration-date" type="date"/>
+                    <element name="credit-limit" type="tns:Credit-limit"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+             
+    <simpleType name="Country">
+        <restriction base="string">
+            <enumeration value="US"/>
+            <enumeration value="DE"/>
+            <enumeration value="GB"/>
+            <enumeration value="BY"/>
+            <enumeration value="RU"/>
+            <enumeration value="FR"/>
+        </restriction>
+    </simpleType>
+     <simpleType name="Account-id">
+        <restriction base="string">
+            <pattern value="\d{4}\s\d{4}\s\d{4}"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="Age">
+        <restriction base="byte">
+            <minInclusive value="18"/>
+            <maxInclusive value="100"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="Credit-limit">
+        <restriction base="long">
+            <minInclusive value="0"/>
+            <maxInclusive value="10000"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Depositor">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="age" type="tns:Age"/>
+            <element name="phone" type="string"/>
+        </sequence>
+    </complexType>
+</schema>
+  
