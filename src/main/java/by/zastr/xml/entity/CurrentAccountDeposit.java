@@ -3,16 +3,15 @@ package by.zastr.xml.entity;
 import java.time.LocalDate;
 
 public class CurrentAccountDeposit extends Deposit{
+	public CurrentAccountDeposit(String bankName, String country, Depositor depositor, String accountId,
+			long amountOnDeposit, byte profitobility) {
+		super(bankName, country, depositor, accountId, amountOnDeposit, profitobility);
+	}
+
 	private LocalDate experationDate;
 	private long creditLimit;
 
 	
-	public CurrentAccountDeposit(String bankName, String country, Depositor depositor, String accountIdString,
-			long amountOnDeposit, LocalDate experationDate, long creditLimit) {
-		super(bankName, country, depositor, accountIdString, amountOnDeposit);
-		this.experationDate = experationDate;
-		this.creditLimit = creditLimit;
-	}
 
 	public LocalDate getExperationDate() {
 		return experationDate;

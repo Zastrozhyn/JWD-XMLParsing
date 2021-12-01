@@ -1,13 +1,13 @@
 package by.zastr.xml.entity;
 
 public class RecurringDeposit extends Deposit{
+	public RecurringDeposit(String bankName, String country, Depositor depositor, String accountId,
+			long amountOnDeposit, byte profitobility) {
+		super(bankName, country, depositor, accountId, amountOnDeposit, profitobility);
+	}
+
 	private int serviceCost;
 
-	public RecurringDeposit(String bankName, String country, Depositor depositor, String accountIdString,
-			long amountOnDeposit, int serviceCost) {
-		super(bankName, country, depositor, accountIdString, amountOnDeposit);
-		this.serviceCost = serviceCost;
-	}
 
 	@Override
 	public int hashCode() {

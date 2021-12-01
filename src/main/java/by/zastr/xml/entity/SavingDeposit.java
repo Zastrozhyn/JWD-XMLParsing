@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 
 public class SavingDeposit extends Deposit{
-	private LocalDate experationDate;
-	public SavingDeposit(String bankName, String country, Depositor depositor, String accountIdString,
-			long amountOnDeposit) {
-		super(bankName, country, depositor, accountIdString, amountOnDeposit);
+	public SavingDeposit(String bankName, String country, Depositor depositor, String accountId, long amountOnDeposit,
+			byte profitobility) {
+		super(bankName, country, depositor, accountId, amountOnDeposit, profitobility);
 	}
+
+	private LocalDate experationDate;
+
 
 	public LocalDate getDate() {
 		return experationDate;

@@ -1,32 +1,22 @@
 package by.zastr.xml.entity;
 
 public abstract class Deposit {
-	private int id;
 	private String bankName;
 	private String country;
 	private Depositor depositor;
-	private String accountIdString;
+	private String accountId;
 	private long amountOnDeposit;
 	private byte profitobility;
 	
-	public Deposit(int id, String bankName, String country, Depositor depositor, String accountIdString,
-			long amountOnDeposit, byte profitobility) {
+	public Deposit(String bankName, String country, Depositor depositor, String accountId, long amountOnDeposit,
+			byte profitobility) {
 		super();
-		this.id = id;
 		this.bankName = bankName;
 		this.country = country;
 		this.depositor = depositor;
-		this.accountIdString = accountIdString;
+		this.accountId = accountId;
 		this.amountOnDeposit = amountOnDeposit;
 		this.profitobility = profitobility;
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public byte getProfitobility() {
@@ -56,10 +46,10 @@ public abstract class Deposit {
 		this.depositor = depositor;
 	}
 	public String getAccountIdString() {
-		return accountIdString;
+		return accountId;
 	}
 	public void setAccountIdString(String accountIdString) {
-		this.accountIdString = accountIdString;
+		this.accountId = accountIdString;
 	}
 	public long getAmountOnDeposit() {
 		return amountOnDeposit;
@@ -79,12 +69,11 @@ public abstract class Deposit {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((accountIdString == null) ? 0 : accountIdString.hashCode());
+		result = prime * result + ((accountId == null) ? 0 : accountId.hashCode());
 		result = prime * result + (int) (amountOnDeposit ^ (amountOnDeposit >>> 32));
 		result = prime * result + ((bankName == null) ? 0 : bankName.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((depositor == null) ? 0 : depositor.hashCode());
-		result = prime * result + id;
 		result = prime * result + profitobility;
 		return result;
 	}
@@ -98,10 +87,10 @@ public abstract class Deposit {
 		if (getClass() != obj.getClass())
 			return false;
 		Deposit other = (Deposit) obj;
-		if (accountIdString == null) {
-			if (other.accountIdString != null)
+		if (accountId == null) {
+			if (other.accountId != null)
 				return false;
-		} else if (!accountIdString.equals(other.accountIdString))
+		} else if (!accountId.equals(other.accountId))
 			return false;
 		if (amountOnDeposit != other.amountOnDeposit)
 			return false;
@@ -120,8 +109,6 @@ public abstract class Deposit {
 				return false;
 		} else if (!depositor.equals(other.depositor))
 			return false;
-		if (id != other.id)
-			return false;
 		if (profitobility != other.profitobility)
 			return false;
 		return true;
@@ -131,7 +118,6 @@ public abstract class Deposit {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Deposit [id=");
-		builder.append(id);
 		builder.append(", bankName=");
 		builder.append(bankName);
 		builder.append(", country=");
@@ -139,7 +125,7 @@ public abstract class Deposit {
 		builder.append(", depositor=");
 		builder.append(depositor);
 		builder.append(", accountIdString=");
-		builder.append(accountIdString);
+		builder.append(accountId);
 		builder.append(", amountOnDeposit=");
 		builder.append(amountOnDeposit);
 		builder.append(", profitobility=");
