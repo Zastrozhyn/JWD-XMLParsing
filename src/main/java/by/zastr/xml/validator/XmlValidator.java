@@ -21,7 +21,7 @@ public class XmlValidator {
 	private static Logger logger = LogManager.getLogger();
     private static final String DEPOSITES_SCHEMA_LOCATION = "src\\main\\resources\\deposites.xsd";
     public boolean isXMLValid(String fileName) {
-    	boolean XMLValid=false;
+    	boolean isValid=false;
     	String language=XMLConstants.W3C_XML_SCHEMA_NS_URI;
     	SchemaFactory factory=SchemaFactory.newInstance(language);
     	File schemaLocation= new File(DEPOSITES_SCHEMA_LOCATION);
@@ -31,13 +31,13 @@ public class XmlValidator {
     		Source source=new StreamSource(fileName);
     		validator.setErrorHandler(new DepositesErrorHandler());
     		validator.validate(source);
-    		XMLValid=true;
+    		isValid=true;
     } catch (SAXException e) {
         logger.log(Level.ERROR, "{} or {} is not correct of valid", fileName, DEPOSITES_SCHEMA_LOCATION);
     } catch (IOException e) {
         logger.log(Level.ERROR, "{} can't be read", fileName);
     }
-    	return XMLValid;
+    	return isValid;
     }
 
 }
