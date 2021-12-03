@@ -17,21 +17,23 @@ import org.xml.sax.SAXException;
 
 import by.zastr.xml.handler.DepositesErrorHandler;
 
-public class XmlValidator {
+public class XmlValidatorImpl implements XMLValidator {
 	private static Logger logger = LogManager.getLogger();
-    private static final String DEPOSITES_SCHEMA_LOCATION = "src\\main\\resources\\deposites.xsd";
+    private static final String DEPOSITES_SCHEMA_LOCATION = "resources\\deposites.xsd";
+    
+    @Override
     public boolean isXMLValid(String fileName) {
     	boolean isValid=false;
-    	String language=XMLConstants.W3C_XML_SCHEMA_NS_URI;
-    	SchemaFactory factory=SchemaFactory.newInstance(language);
+    	String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+    	SchemaFactory factory = SchemaFactory.newInstance(language);
     	File schemaLocation= new File(DEPOSITES_SCHEMA_LOCATION);
     	try {
-    		Schema schema= factory.newSchema(schemaLocation);
-    		Validator validator =schema.newValidator();
-    		Source source=new StreamSource(fileName);
+    		Schema schema = factory.newSchema(schemaLocation);
+    		Validator validator = schema.newValidator();
+    		Source source = new StreamSource(fileName);
     		validator.setErrorHandler(new DepositesErrorHandler());
     		validator.validate(source);
-    		isValid=true;
+    		isValid = true;
     } catch (SAXException e) {
         logger.log(Level.ERROR, "{} or {} is not correct of valid", fileName, DEPOSITES_SCHEMA_LOCATION);
     } catch (IOException e) {

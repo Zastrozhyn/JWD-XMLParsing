@@ -1,13 +1,24 @@
 package by.zastr.xml.entity;
 
-public class RecurringDeposit extends Deposit{
-	public RecurringDeposit(String bankName, String country, Depositor depositor, String accountId,
-			long amountOnDeposit, byte profitobility) {
-		super(bankName, country, depositor, accountId, amountOnDeposit, profitobility);
-	}
-
+public class RecurringDeposit extends AbstractDeposit{	
 	private int serviceCost;
 
+	public RecurringDeposit(String accountId, String bankName, String country, Depositor depositor,
+			long amountOnDeposit, byte profitobility, boolean revocable) {
+		super(accountId, bankName, country, depositor, amountOnDeposit, profitobility, revocable);
+	}
+	
+	public RecurringDeposit() {
+		setDepositor(new Depositor());
+	}
+
+	public int getServiceCost() {
+		return serviceCost;
+	}
+
+	public void setServiceCost(int serviceCost) {
+		this.serviceCost = serviceCost;
+	}
 
 	@Override
 	public int hashCode() {
@@ -40,7 +51,4 @@ public class RecurringDeposit extends Deposit{
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-
 }

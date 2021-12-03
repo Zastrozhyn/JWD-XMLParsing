@@ -4,6 +4,9 @@ public class Depositor {
 	private String name;
 	private byte age;
 	private String phone;
+	
+	public Depositor() {
+	}
 	public Depositor(String name, byte age, String phone) {
 		super();
 		this.name = name;

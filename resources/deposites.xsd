@@ -25,7 +25,7 @@
             <element name="amount-on-deposit" type="long"/>
             <element name="profitability" type="byte"/>
         </sequence>
-        <attribute name="id" use="required" type="integer"/>
+        <attribute name="revocable" use="required" type="boolean"/>
         <attribute name="website" use="optional" type="string"/>
     </complexType>
     
@@ -53,7 +53,6 @@
         <complexContent>
             <extension base="tns:Deposit">
                 <sequence>
-                    <element name="expiration-date" type="date"/>
                     <element name="credit-limit" type="tns:Credit-limit"/>
                 </sequence>
             </extension>
@@ -71,8 +70,8 @@
         </restriction>
     </simpleType>
      <simpleType name="Account-id">
-        <restriction base="string">
-            <pattern value="\d{4}\s\d{4}\s\d{4}"/>
+        <restriction base="ID">
+            <pattern value="id\d{4}"/>
         </restriction>
     </simpleType>
     <simpleType name="Age">

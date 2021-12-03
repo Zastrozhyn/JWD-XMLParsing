@@ -1,26 +1,26 @@
 package by.zastr.xml.handler;
 
 public enum DepositXmlTag {
-	BANK_NAME("bank-name"),
-	COUNTRY("country"),
-	DEPOSITOR("depositor"),
-	NAME("name"),
-	AGE("age"),
-	PHONE("phone"),
-	ACCOUNT_ID("account-id"),
-	AMMOUNT_ON_DEPOSIT("ammount-on-deposit"),
-	PROFITABILITY("profitability"),
-	EXPIRATION_DATE("expiration-date"),
-	SERVICE_COST("service-cost"),
-	WEBSITE("website"),
-	CREDIT_LIMIT("credit-limit");
-	private String value;
+	DEPOSITOR,
+	DEPOSITES,
+	ACCOUNT_ID,
+	COUNTRY,
+	BANK_NAME,
+	NAME,
+	AGE,
+	PHONE,
+	AMOUNT_ON_DEPOSIT,
+	PROFITABILITY,
+	EXPIRATION_DATE,
+	SERVICE_COST,
+	CREDIT_LIMIT,
+	WEBSITE,
+	REVOCABLE,
+	CURRENT_ACCOUNT_DEPOSIT,
+	RECURRING_DEPOSIT,
+	SAVING_DEPOSIT;
 	
-	DepositXmlTag(String value) {
-		this.value=value;
-	}
-
-	public String getValue() {
-		return value;
+	public String toString() {
+		return this.name().toLowerCase().replace("_", "-");
 	}
 }

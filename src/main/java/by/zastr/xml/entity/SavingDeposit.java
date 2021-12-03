@@ -3,14 +3,17 @@ package by.zastr.xml.entity;
 import java.time.LocalDate;
 
 
-public class SavingDeposit extends Deposit{
-	public SavingDeposit(String bankName, String country, Depositor depositor, String accountId, long amountOnDeposit,
-			byte profitobility) {
-		super(bankName, country, depositor, accountId, amountOnDeposit, profitobility);
+public class SavingDeposit extends AbstractDeposit{
+	private LocalDate experationDate;
+	
+	public SavingDeposit(String accountId, String bankName, String country, Depositor depositor, long amountOnDeposit,
+			byte profitobility, boolean revocable) {
+		super(accountId, bankName, country, depositor, amountOnDeposit, profitobility, revocable);
 	}
 
-	private LocalDate experationDate;
-
+	public SavingDeposit() {
+		setDepositor(new Depositor());
+	}
 
 	public LocalDate getDate() {
 		return experationDate;

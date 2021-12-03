@@ -1,22 +1,53 @@
 package by.zastr.xml.entity;
 
-public abstract class Deposit {
+public abstract class AbstractDeposit {
+	public static final String NO_WEBSITE = "no website";
+	private String accountId;
 	private String bankName;
 	private String country;
 	private Depositor depositor;
-	private String accountId;
 	private long amountOnDeposit;
 	private byte profitobility;
+	private boolean revocable;
+	private String website;
 	
-	public Deposit(String bankName, String country, Depositor depositor, String accountId, long amountOnDeposit,
-			byte profitobility) {
+	public AbstractDeposit(String accountId, String bankName, String country, Depositor depositor, long amountOnDeposit,
+			byte profitobility, boolean revocable) {
 		super();
+		this.accountId = accountId;
 		this.bankName = bankName;
 		this.country = country;
 		this.depositor = depositor;
-		this.accountId = accountId;
 		this.amountOnDeposit = amountOnDeposit;
 		this.profitobility = profitobility;
+		this.revocable = revocable;
+		this.website =NO_WEBSITE;
+	}
+	public AbstractDeposit() {
+	}
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public boolean isRevocable() {
+		return revocable;
+	}
+
+	public void setRevocable(boolean revocable) {
+		this.revocable = revocable;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	public byte getProfitobility() {
@@ -30,41 +61,34 @@ public abstract class Deposit {
 	public String getBankName() {
 		return bankName;
 	}
+	
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
 	}
+	
 	public String getCountry() {
 		return country;
 	}
+	
 	public void setCountry(String country) {
 		this.country = country;
 	}
 	public Depositor getDepositor() {
 		return depositor;
 	}
+	
 	public void setDepositor(Depositor depositor) {
 		this.depositor = depositor;
 	}
-	public String getAccountIdString() {
-		return accountId;
-	}
-	public void setAccountIdString(String accountIdString) {
-		this.accountId = accountIdString;
-	}
+	
 	public long getAmountOnDeposit() {
 		return amountOnDeposit;
 	}
+	
 	public void setAmountOnDeposit(long amountOnDeposit) {
 		this.amountOnDeposit = amountOnDeposit;
 	}
-	
-	public byte getProfibility() {
-		return profitobility;
-	}
-	public void setProfibility(byte profibility) {
-		this.profitobility = profibility;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +99,8 @@ public abstract class Deposit {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((depositor == null) ? 0 : depositor.hashCode());
 		result = prime * result + profitobility;
+		result = prime * result + (revocable ? 1231 : 1237);
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
 		return result;
 	}
 
@@ -86,7 +112,7 @@ public abstract class Deposit {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Deposit other = (Deposit) obj;
+		AbstractDeposit other = (AbstractDeposit) obj;
 		if (accountId == null) {
 			if (other.accountId != null)
 				return false;
@@ -111,26 +137,36 @@ public abstract class Deposit {
 			return false;
 		if (profitobility != other.profitobility)
 			return false;
+		if (revocable != other.revocable)
+			return false;
+		if (website == null) {
+			if (other.website != null)
+				return false;
+		} else if (!website.equals(other.website))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Deposit [id=");
+		builder.append("Deposit [accountId=");
+		builder.append(accountId);
 		builder.append(", bankName=");
 		builder.append(bankName);
 		builder.append(", country=");
 		builder.append(country);
 		builder.append(", depositor=");
 		builder.append(depositor);
-		builder.append(", accountIdString=");
-		builder.append(accountId);
 		builder.append(", amountOnDeposit=");
 		builder.append(amountOnDeposit);
 		builder.append(", profitobility=");
 		builder.append(profitobility);
+		builder.append(", revocable=");
+		builder.append(revocable);
+		builder.append(", website=");
+		builder.append(website);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }
