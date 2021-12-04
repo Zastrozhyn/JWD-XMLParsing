@@ -25,7 +25,7 @@ public class DepositSaxBuilder implements DepositBuilder {
 	private static Logger logger = LogManager.getLogger();
 	private DepositHandler handler = new DepositHandler();
     private XMLReader reader;
-    private XMLValidator validator=new XmlValidatorImpl();
+    private XMLValidator validator = new XmlValidatorImpl();
 	
 	public DepositSaxBuilder() {
 		depositeList=new ArrayList<AbstractDeposit>();
@@ -49,7 +49,7 @@ public class DepositSaxBuilder implements DepositBuilder {
 	}
 
 	@Override
-	public void buildListDeposit(String fileName) throws XmlDepositException {
+	public void buildDepositList(String fileName) throws XmlDepositException {
         if (!validator.isXMLValid(fileName)) {
             throw new XmlDepositException(String.format("File %s hasn't passed validation!", fileName));
         }
@@ -57,7 +57,7 @@ public class DepositSaxBuilder implements DepositBuilder {
         try {
             reader.parse(fileName);
         } catch (IOException | SAXException e) {
-            logger.log(Level.ERROR, "Any SAX or IO Exception during parsing {}", fileName);
+            logger.log(Level.ERROR, " SAX or IO Exception during parsing {}", fileName);
         }
 
         depositeList = handler.getDepositeList();

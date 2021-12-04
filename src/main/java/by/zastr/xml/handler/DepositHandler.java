@@ -28,7 +28,6 @@ public class DepositHandler extends DefaultHandler{
 	public DepositHandler() {
 		depositeList= new ArrayList<AbstractDeposit>();
 		withText=EnumSet.range(DepositXmlTag.ACCOUNT_ID, DepositXmlTag.WEBSITE);
-		System.out.println(withText);
 	}
 	
 	public List<AbstractDeposit> getDepositeList() {
@@ -42,16 +41,16 @@ public class DepositHandler extends DefaultHandler{
                 || qName.equals(SAVING_DEPOSIT.toString())) {
         	currentXmlTag = valueOf(qName.toUpperCase().replace(HYPHEN, UNDERSCORE));
         	switch (currentXmlTag) {
-                case CURRENT_ACCOUNT_DEPOSIT:
-                    currentDeposit = new CurrentAccountDeposit();
-                    break;
-                case RECURRING_DEPOSIT:
-                    currentDeposit = new RecurringDeposit();
-                    break;
-                case SAVING_DEPOSIT:
-                    currentDeposit = new SavingDeposit();
-                    break;    
-            }
+            case CURRENT_ACCOUNT_DEPOSIT:
+                currentDeposit = new CurrentAccountDeposit();
+                break;
+            case RECURRING_DEPOSIT:
+                currentDeposit = new RecurringDeposit();
+                break;
+            case SAVING_DEPOSIT:
+                currentDeposit = new SavingDeposit();
+                break;    
+        }
             currentXmlTag = null;
             currentDeposit.setRevocable(Boolean.valueOf(attributes.getValue(REVOCABLE.toString())) );
 
@@ -81,9 +80,6 @@ public class DepositHandler extends DefaultHandler{
     public void characters(char[] ch, int start, int length) {
         String data = new String(ch, start, length).trim();
         if (currentXmlTag != null) {
-        	if (currentDeposit.getClass().getSimpleName().equals("CurrentAccountDeposit")) {
-               System.out.println(currentXmlTag.toString()+" -> "+data);
-               }
             switch (currentXmlTag) {
                 case ACCOUNT_ID:
                     currentDeposit.setAccountId(data);
@@ -132,7 +128,7 @@ public class DepositHandler extends DefaultHandler{
 	
     @Override
     public void endDocument() {
-        logger.log(Level.INFO, "SAX parsing has finished successfully");
+        logger.log(Level.INFO, "SAX parsing deposites has finished successfully");
     }
 	
 }

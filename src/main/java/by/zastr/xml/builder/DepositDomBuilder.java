@@ -25,12 +25,16 @@ import by.zastr.xml.entity.Depositor;
 import by.zastr.xml.entity.RecurringDeposit;
 import by.zastr.xml.entity.SavingDeposit;
 import by.zastr.xml.exception.XmlDepositException;
+import by.zastr.xml.validator.XMLValidator;
+import by.zastr.xml.validator.XmlValidatorImpl;
+
 import static by.zastr.xml.handler.DepositXmlTag.*;
 
 public class DepositDomBuilder implements DepositBuilder{
     private static Logger logger = LogManager.getLogger();
     private DocumentBuilder documentBuilder;
     private List<AbstractDeposit> depositList;
+    private XMLValidator validator = new XmlValidatorImpl();
     
 	public DepositDomBuilder() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -43,7 +47,10 @@ public class DepositDomBuilder implements DepositBuilder{
     }
 	
     @Override
-    public void buildListDeposit(String fileName) throws XmlDepositException {
+    public void buildDepositList(String fileName) throws XmlDepositException {
+        if (!validator.isXMLValid(fileName)) {
+            throw new XmlDepositException(String.format("File %s hasn't passed validation!", fileName));
+        }
     	Document doc;
     	try {
 			doc = documentBuilder.parse(fileName);
@@ -73,8 +80,9 @@ public class DepositDomBuilder implements DepositBuilder{
 		} catch (SAXException e) {
 			logger.log(Level.ERROR, "DocumentBuilder cannot be created which satisfies the configuration requested");
 		} catch (IOException e) {
-			logger.log(Level.ERROR, "Any SAX or IO Exception during parsing {}", fileName);
+			logger.log(Level.ERROR, "IO Exception during parsing {}", fileName);
 		}
+    	logger.log(Level.INFO, "DOM parsing deposites has finished successfully");
     }
     
     private static String getElementTextContent(Element element, String elementName) {
@@ -128,7 +136,6 @@ public class DepositDomBuilder implements DepositBuilder{
         deposit.setWebsite(website);
         boolean revocable=Boolean.parseBoolean(depositElement.getAttribute(REVOCABLE.toString()));
         deposit.setRevocable(revocable);
-        logger.log(Level.INFO, "build completed successfully");
     	return deposit;
     }
     

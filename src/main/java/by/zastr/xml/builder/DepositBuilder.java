@@ -9,6 +9,6 @@ public interface DepositBuilder {
 
 	List<AbstractDeposit> getDepositList();
 
-	void buildListDeposit(String fileName) throws XmlDepositException;
+	void buildDepositList(String fileName) throws XmlDepositException;
 
 }
