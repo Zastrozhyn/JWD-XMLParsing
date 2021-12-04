@@ -6,7 +6,7 @@ import by.zastr.xml.exception.XmlDepositException;
 
 public class DepositStaxBuilderTest {
 	
-	DepositStaxBuilder staxBuilder= new DepositStaxBuilder();
+	DepositStaxBuilder staxBuilder = new DepositStaxBuilder();
 
   @Test(expectedExceptions = XmlDepositException.class)
   public void buildListDepositTest() throws XmlDepositException {

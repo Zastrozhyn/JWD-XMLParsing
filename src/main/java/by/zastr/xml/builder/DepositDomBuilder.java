@@ -38,7 +38,7 @@ public class DepositDomBuilder implements DepositBuilder{
     
 	public DepositDomBuilder() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        depositList= new ArrayList<AbstractDeposit>();
+        depositList = new ArrayList<AbstractDeposit>();
         try {
             documentBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -95,7 +95,7 @@ public class DepositDomBuilder implements DepositBuilder{
     	AbstractDeposit deposit;
     	if (depositElement.getTagName().equals(SAVING_DEPOSIT.toString())) {
     		deposit=new SavingDeposit();
-    		String date=getElementTextContent(depositElement, EXPIRATION_DATE.toString());
+    		String date = getElementTextContent(depositElement, EXPIRATION_DATE.toString());
     		((SavingDeposit)deposit).setDate(LocalDate.parse(date));
     	}
     	else if (depositElement.getTagName().equals(CURRENT_ACCOUNT_DEPOSIT.toString())) {
@@ -105,36 +105,36 @@ public class DepositDomBuilder implements DepositBuilder{
     	}
     	else if (depositElement.getTagName().equals(RECURRING_DEPOSIT.toString())) {
     		deposit=new RecurringDeposit();    
-    		int serviceCost=Integer.parseInt(getElementTextContent(depositElement, SERVICE_COST.toString()));
+    		int serviceCost = Integer.parseInt(getElementTextContent(depositElement, SERVICE_COST.toString()));
     		((RecurringDeposit)deposit).setServiceCost(serviceCost);
     	}
         else {
         	throw new XmlDepositException("Invalid deposit type");
         } 
         
-        String id=getElementTextContent(depositElement, ACCOUNT_ID.toString());
+        String id = getElementTextContent(depositElement, ACCOUNT_ID.toString());
         deposit.setAccountId(id);
-        String bank=getElementTextContent(depositElement, BANK_NAME.toString());
+        String bank = getElementTextContent(depositElement, BANK_NAME.toString());
         deposit.setBankName(bank);
-        String country=getElementTextContent(depositElement, COUNTRY.toString());
+        String country = getElementTextContent(depositElement, COUNTRY.toString());
         deposit.setCountry(country);
-        long amount= Long.parseLong(getElementTextContent(depositElement, AMOUNT_ON_DEPOSIT.toString()));
+        long amount = Long.parseLong(getElementTextContent(depositElement, AMOUNT_ON_DEPOSIT.toString()));
         deposit.setAmountOnDeposit(amount);
-        byte profitability=Byte.parseByte(getElementTextContent(depositElement, PROFITABILITY.toString()));
+        byte profitability = Byte.parseByte(getElementTextContent(depositElement, PROFITABILITY.toString()));
         deposit.setProfitobility(profitability);
-        NodeList depositorNode=depositElement.getElementsByTagName(DEPOSITOR.toString());
-        Element depositorElement=(Element)depositorNode.item(0);
-        String name=getElementTextContent(depositorElement, NAME.toString());
-        byte age=Byte.parseByte(getElementTextContent(depositorElement, AGE.toString()));
-        String phone=getElementTextContent(depositorElement, PHONE.toString());
-        Depositor depositor=new Depositor(name, age, phone);
+        NodeList depositorNode = depositElement.getElementsByTagName(DEPOSITOR.toString());
+        Element depositorElement = (Element)depositorNode.item(0);
+        String name = getElementTextContent(depositorElement, NAME.toString());
+        byte age = Byte.parseByte(getElementTextContent(depositorElement, AGE.toString()));
+        String phone = getElementTextContent(depositorElement, PHONE.toString());
+        Depositor depositor = new Depositor(name, age, phone);
         deposit.setDepositor(depositor);
         String website = depositElement.getAttribute(WEBSITE.toString());
         if (website.isBlank()) {
             website = AbstractDeposit.NO_WEBSITE;
         }
         deposit.setWebsite(website);
-        boolean revocable=Boolean.parseBoolean(depositElement.getAttribute(REVOCABLE.toString()));
+        boolean revocable = Boolean.parseBoolean(depositElement.getAttribute(REVOCABLE.toString()));
         deposit.setRevocable(revocable);
     	return deposit;
     }

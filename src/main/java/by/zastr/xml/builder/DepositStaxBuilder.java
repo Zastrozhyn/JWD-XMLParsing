@@ -172,5 +172,4 @@ public class DepositStaxBuilder implements DepositBuilder{
 		}
 		return text;
 	}
-
 }

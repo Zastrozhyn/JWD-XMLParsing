@@ -23,7 +23,7 @@ public class XmlValidatorImpl implements XMLValidator {
     
     @Override
     public boolean isXMLValid(String fileName) {
-    	boolean isValid=false;
+    	boolean isValid = false;
     	String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
     	SchemaFactory factory = SchemaFactory.newInstance(language);
     	File schemaLocation= new File(DEPOSITES_SCHEMA_LOCATION);

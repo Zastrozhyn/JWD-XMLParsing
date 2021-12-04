@@ -26,8 +26,8 @@ public class DepositHandler extends DefaultHandler{
     private static Logger logger = LogManager.getLogger();
 	
 	public DepositHandler() {
-		depositeList= new ArrayList<AbstractDeposit>();
-		withText=EnumSet.range(DepositXmlTag.ACCOUNT_ID, DepositXmlTag.WEBSITE);
+		depositeList = new ArrayList<AbstractDeposit>();
+		withText = EnumSet.range(DepositXmlTag.ACCOUNT_ID, DepositXmlTag.WEBSITE);
 	}
 	
 	public List<AbstractDeposit> getDepositeList() {
